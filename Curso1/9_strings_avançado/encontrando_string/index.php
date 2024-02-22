@@ -13,6 +13,4 @@ if(!$testeEncontrar1) {
     echo "$testeEncontrar <br>";
 }
 
-
-
 ?>
