@@ -21,11 +21,39 @@ class Car {
 
 }
 
+class Dog {
 
-$ferrari = new car(4, "vermelha", "Ferrari");
-$bmw = new car(4, "Roxa", "bmw");
+    public $patas; 
+    public $pelagem;
+    public $nome;
 
-$bmw->exibeCar();
-$ferrari->exibeCar();
+
+    function __construct($patas, $pelagem, $nome)
+    {
+        $this->patas = $patas;        
+        $this->pelagem = $pelagem;        
+        $this->nome = $nome;        
+    }
+
+
+    public function showDog() {
+        echo "O cachorro tem $this->patas, tem a pelagem $this->pelagem e se chama $this->nome";
+    }
+
+}
+
+$mel = new Dog(4, "preta", "Mel");
+
+$mel->showDog();
+
+
+// $ferrari = new car(4, "vermelha", "Ferrari");
+// $bmw = new car(4, "Roxa", "bmw");
+
+// $bmw->exibeCar();
+// $ferrari->exibeCar();
+
+
+
 
 ?>
