@@ -1,10 +1,9 @@
 <?php
 
-    session_start();
+session_start();
 
-   // print_r($_SESSION);
+print_r($_SESSION);
 
-   $_SESSION['nome'] = "William";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Olá Session!</h1>
-    <a href="./pagina.php">pagina 2</a>
+    <h1>Bem vindo, <?= $_SESSION['nome']?></h1>
+    <a href="./index.php">Voltar</a>
 </body>
 </html>
