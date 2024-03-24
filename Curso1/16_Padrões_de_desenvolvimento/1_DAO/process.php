@@ -5,16 +5,27 @@ include_once("dao/CarDAO.php");
 
 $carDao = new CarDao($conn);
 
-$brand = $_POST["brand"];
-$km = $_POST["km"];
-$color = $_POST["color"];
+if (isset($_POST["id"])) {
+    $carId = $_POST['id'];
 
-$newCar = new Car();
+    $carToDelete = new Car();
+    $carToDelete->setId($carId);
 
-$newCar->setBrand($brand);
-$newCar->setKm($km);
-$newCar->setColor($color);
+    $carDao->delete($carToDelete);
 
-$carDao->create($newCar);
+    header("Location: index.php");
+} else {
+    $brand = $_POST["brand"];
+    $km = $_POST["km"];
+    $color = $_POST["color"];
 
-header("Location: index.php");
+    $newCar = new Car();
+
+    $newCar->setBrand($brand);
+    $newCar->setKm($km);
+    $newCar->setColor($color);
+
+    $carDao->create($newCar);
+
+    header("Location: index.php");
+}

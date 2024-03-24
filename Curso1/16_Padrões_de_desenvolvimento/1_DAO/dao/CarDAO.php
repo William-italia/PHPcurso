@@ -44,4 +44,15 @@ class CarDAO implements CarDAOInterface
 
         $stmt->execute();
     }
+
+    public function delete(car $car)
+    {
+        $carId = $car->getId();
+
+        $stmt = $this->conn->prepare("DELETE FROM cars WHERE id = :id");
+
+        $stmt->bindParam(":id", $carId);
+
+        $stmt->execute();
+    }
 }
