@@ -3,27 +3,33 @@
 $host = "localhost";
 $user = "root";
 $pass = "root";
-$db = "section6";
+$db = "teste1";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
-$id = 11;
-$nome = "Marcelo";
-$telefone = "13 2876-2385";
+$id = 9;
+$nome = "Prato";
+$preco = 35.90;
 
 
-$stmt = $conn->prepare("UPDATE professores SET professor = ?, telefone = ? WHERE id = ?");
+// $stmt = $conn->prepare("UPDATE items SET nome = ?, preco = ? WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM items WHERE id = ?");
 
-$stmt->bind_param("ssi", $nome, $telefone, $id);
+// $stmt->bind_param("sdi", $nome, $preco, $id);
+$stmt->bind_param("i", $id);
 
 $stmt->execute();
 
-if($stmt->error) {
-    echo "Erro: " . $stmt->error;
+$result = $stmt->get_result();
+
+$produto = $result->fetch_row();
+
+if ($produto !== null) {
+    echo 'Nome: ' . $produto[1] . ', Preço: ' . $produto[2] . '<br>';
+} else {
+    'Nenhum produto encontrado com o ID: ' . $id;
 }
 
-
-
-
-
-?>
+if ($stmt->error) {
+    echo "Erro: " . $stmt->error;
+}

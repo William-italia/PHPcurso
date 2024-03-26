@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "root";
-$db = "teste";
+$db = "teste1";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
@@ -20,17 +20,29 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 
-$items = $result->fetch_all();
+// $items = $result->fetch_all();
 
-foreach ($items as $item) {
-    echo $item[1];
-    echo " R$";
-    echo $item[2];
+// foreach ($items as $item) {
+//     echo $item[0] . ' ';
+//     echo $item[1];
+//     echo " R$";
+//     echo $item[2];
+//     echo "<br>";
+// }
+
+// while ($item = $result->fetch_object()) {
+//     echo $item->id . ' ';
+//     echo $item->nome . " R$";
+//     echo $item->preco;
+//     echo "<br>";
+// }
+while ($item = $result->fetch_assoc()) {
+    echo $item['id'] . ' ';
+    echo $item['nome'] . " R$";
+    echo $item['preco'];
     echo "<br>";
 }
 
 // print_r($items);
 
 $stmt->close();
-
-?>
