@@ -1,5 +1,17 @@
 <?php
 $output = null;
+
+$output = date('Y-m-d h:i:s a');
+
+$dia = date('d');
+$mes = date('m');
+$ano = date('Y', strtotime('2020-01-1'));
+$hora = date('h');
+$min = date('i');
+$seconds = date('s');
+$a = date('a');
+
+$output = $dia . '/' . $mes . '/' . $ano . ' ' . $hora . ':' . $min . ':' . $seconds . ' ' . $a;
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +33,7 @@ $output = null;
     <div class="container mx-auto p-4 mt-4">
         <div class="bg-white rounded-lg shadow-md p-6 mt-6">
             <!-- Output -->
-            <p class="text-xl"><?php echo $output; ?></p>
+            <p class="text-xl"><?= $output; ?></p>
         </div>
     </div>
 </body>

@@ -61,7 +61,7 @@ $urls = [
     <div class="bg-white rounded-lg shadow-md p-6 mt-6">
       <ul>
         <?php foreach ($sites as $key => $site) : ?>
-          <li class="RED"><a href="<?= $urls[$key] ?>"><?= $site; ?></a></li>
+          <li class="RED"><a href="<?= $urls[$key] ?>" target="_blank"><?= $site; ?></a></li>
         <?php endforeach; ?>
       </ul>
     </div>
