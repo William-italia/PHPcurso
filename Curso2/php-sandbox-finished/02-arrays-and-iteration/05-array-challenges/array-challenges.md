@@ -134,3 +134,29 @@ echo $listings[2]['skills'][0];
 ```
 
 </details>
+
+Agora quero que você faça alguns desafios básicos por conta própria. Eles são muito fáceis e lidamos apenas com coisas que já trabalhamos até agora. Por exemplo, ainda não cobrimos loops, então não espero que você os use. Você não precisa usar o modelo HTML. Você pode apenas usar `echo` para imprimir os resultados.
+
+## Desafio 1: Soma de um array
+
+Crie um array de números e obtenha a soma sem usar array_sum(). Em seguida, imprima 'A soma dos {quantidade} números é: {soma}'. Por exemplo, se o array for [1, 2, 3, 4, 5], a saída deve ser `A soma dos 5 números é: 15`.
+
+### Dicas
+
+- Você pode usar `count()` para obter a quantidade de números no array.
+- Ainda não cobrimos loops, então não espero que você os use. Você pode apenas somar os números manualmente.
+
+<details>
+  <summary>Clique para ver a solução</summary>
+
+```php
+$numbers = [1, 2, 3, 4, 5];
+
+// 1. some os números
+$soma = $numbers[0] + $numbers[1] + $numbers[2] + $numbers[3] + $numbers[4];
+
+// 2. Obtenha a quantidade de números no array
+$quantidade = count($numbers);
+
+// 3. Imprima a string
+echo 'A soma dos ' . $quantidade . ' números é: ' . $soma;

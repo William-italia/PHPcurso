@@ -1,5 +1,27 @@
 <?php
 $output = null;
+
+$user = [
+    'name' => 'John',
+    'email' => 'john@gmail.com',
+    'password' => 'secret',
+    'hobbies' => ['Tennis', 'Video Games'],
+];
+
+$output = $user['name'];
+$output = $user['email'];
+$output = $user['hobbies'][1];
+$user['address'] = '123 Main Street';
+$output = $user['address'];
+
+// unset($user['address']); Removing element
+
+ob_start();
+
+print_r($user);
+
+$out = ob_get_clean();
+
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +43,8 @@ $output = null;
     <div class="container mx-auto p-4 mt-4">
         <div class="bg-white rounded-lg shadow-md p-6 mt-6">
             <!-- Output -->
-            <p class="text-xl"><?= $output ?></p>
+            <p><?= $output ?></p>
+            <pre class="text-xl"><?= $out ?></pre>
         </div>
     </div>
 </body>

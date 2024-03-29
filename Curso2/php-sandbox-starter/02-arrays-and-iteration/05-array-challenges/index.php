@@ -1,5 +1,6 @@
 <?php
 
+
 /*
   Challenge 1: Sum of an array
   
@@ -8,7 +9,16 @@
   4. Get the amount of numbers in the array and put into a variable.
   5. Print out 'The sum of the {amount} numbers is: {sum} '. For example, if the array is [1, 2, 3, 4, 5], the output should be 'The sum of the 5 numbers is: 15'. 
 */
-echo '<h3>Sum Of An Array</h3>';
+$nums = range(1, 5, 1);
+
+$total = 0;
+
+for ($i = 0; $i < count($nums); $i++) {
+  $total += $nums[$i];
+}
+
+$soma = 'A soma dos ' . count($nums) . ' números é: ' . $total;
+
 
 /*
   Challenge 2: Colors array
@@ -21,9 +31,14 @@ echo '<h3>Sum Of An Array</h3>';
 You should end up with the following array: ['yellow', 'pink', 'blue', 'red', 'purple']
 */
 
-echo '<h3>Colors Array</h3>';
-
 $colors = ['red', 'blue', 'green', 'yellow'];
+
+$colors = array_reverse($colors);
+$colors = array_merge($colors, ['roxo', 'laranja']);
+array_splice($colors, 1, 0, 'rosa');
+array_pop($colors);
+
+
 
 /*
   Challenge 3: Job listings array
@@ -34,4 +49,77 @@ $colors = ['red', 'blue', 'green', 'yellow'];
   4. Print out the first skill of the third job listing in the array.
 */
 
-echo '<h3>Job Listings</h3>';
+$listings = [
+  [
+    'id' => 1,
+    'job_title' => 'PHP Developer',
+    'company' => 'ABC Company',
+    'contact_email' => 'john@email.com',
+    'contact_phone' => '123-456-7890',
+    'skills' => ['PHP', 'MySQL', 'JavaScript']
+  ],
+  [
+    'id' => 2,
+    'job_title' => 'Web Designer',
+    'company' => '123 Company',
+    'contact_email' => 'jane@email.com',
+    'contact_phone' => '555-456-7890',
+    'skills' => ['PhotoShop', 'Illustrator', 'CSS']
+  ],
+  [
+    'id' => 3,
+    'job_title' => 'Web Developer',
+    'company' => 'ABC Company',
+    'contact_email' => 'john@email.com',
+    'contact_phone' => '123-456-7890',
+    'skills' => ['PHP', 'MySQL', 'JavaScript']
+  ]
+];
+
+array_push($listings, [
+  'id' => 4,
+  'job_title' => 'Graphic Designer',
+  'company' => '123 Company',
+  'contact_email' => 'beth@email.com',
+  'contact_phone' => '123-456-7890',
+  'skills' => ['PhotoShop', 'Illustrator', 'CSS']
+]);
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Soma de um Array</h1>
+  <p><?= $soma; ?></p>
+  <h1>Array cores</h1>
+  <pre><?php print_r($colors); ?></pre>
+  <h1>Listagem de empregos</h1>
+  <ul>
+    <?php foreach ($listings as $job) : ?>
+      <li>
+        <p><strong><?= $job['job_title'] ?></strong> At <?= $job['company'] ?></p>
+        <ul>
+          <?php foreach ($job['skills'] as $skill) : ?>
+            <li><?= $skill ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </li>
+
+
+
+    <?php endforeach; ?>
+  </ul>
+  <pre>
+    <?php print_r($listings) ?>
+  </pre>
+</body>
+
+</html>
