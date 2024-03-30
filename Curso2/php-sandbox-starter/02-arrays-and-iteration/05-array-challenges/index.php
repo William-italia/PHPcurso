@@ -31,7 +31,7 @@ $soma = 'A soma dos ' . count($nums) . ' números é: ' . $total;
 You should end up with the following array: ['yellow', 'pink', 'blue', 'red', 'purple']
 */
 
-$colors = ['red', 'blue', 'green', 'yellow'];
+$colors = ['vermelho', 'azul', 'verde', 'amarelo'];
 
 $colors = array_reverse($colors);
 $colors = array_merge($colors, ['roxo', 'laranja']);
@@ -99,8 +99,17 @@ array_push($listings, [
 <body>
   <h1>Soma de um Array</h1>
   <p><?= $soma; ?></p>
+
   <h1>Array cores</h1>
+  <ul>
+    <?php foreach ($colors as $color) : ?>
+      <li><?= $color ?></li>
+    <?php endforeach; ?>
+  </ul>
+  <p>Minha cor favorita é: <strong><?= $colors[3] ?></strong></p>
   <pre><?php print_r($colors); ?></pre>
+
+
   <h1>Listagem de empregos</h1>
   <ul>
     <?php foreach ($listings as $job) : ?>
