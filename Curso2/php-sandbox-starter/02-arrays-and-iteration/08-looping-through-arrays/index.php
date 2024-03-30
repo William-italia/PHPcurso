@@ -29,15 +29,39 @@ $users = [
     <div class="bg-white rounded-lg shadow-md p-6 mt-6">
       <!-- Output -->
       <h3 class="text-xl font-semibold mb-4">Using a for loop</h3>
-      <ul class="mb-6"></ul>
+      <ul class="mb-6">
+        <?php for ($i = 0; $i < count($users); $i++) : ?>
+          <li>Nome: <?= $users[$i]['name'] ?>, Email: <?= $users[$i]['email'] ?></li>
+        <?php endfor; ?>
+      </ul>
       <h3 class="text-xl font-semibold mb-4">Using a foreach loop</h3>
-      <ul class="mb-6"></ul>
+      <ul class="mb-6">
+        <?php foreach ($users as $user) : ?>
+          <?php foreach ($user as $key => $value) : ?>
+            <li><?= $key ?>: <?= $value ?></li>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
+      </ul>
       <h3 class="text-xl font-semibold mb-4">Using a foreach loop with index</h3>
-      <ul class="mb-6"></ul>
+      <ul class="mb-6">
+        <?php foreach ($users as $key => $user) : ?>
+          <li><?= $key ?> - Nome: <?= $user['name'] ?>, Email: <?= $user['email'] ?></li>
+        <?php endforeach; ?>
+      </ul>
       <h3 class="text-xl font-semibold mb-4">Using a foreach loop with associative array</h3>
-      <ul class="mb-6"></ul>
+      <ul class="mb-6">
+        <?php foreach ($names as $key => $name) : ?>
+          <li><?= $key ?> - Nome: <?= $name ?></li>
+        <?php endforeach; ?>
+      </ul>
       <h3 class="text-xl font-semibold mb-4">Getting key names and values from associative array</h3>
-      <ul class="mb-6"></ul>
+      <ul class="mb-6">
+        <?php foreach ($users as $user) : ?>
+          <?php foreach ($user as $key => $value) : ?>
+            <li><?= $key ?> - <?= $value ?></li>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
+      </ul>
     </div>
   </div>
 </body>
