@@ -38,7 +38,7 @@ $listings = [
     'description' => 'We are looking for a friendly customer service representative to assist customers and resolve issues.',
     'salary' => 40000,
     'location' => 'New York',
-    'tags' => ['Customer Support', 'Communication', 'Problem Solving']
+    'tags' => []
   ],
 ];
 ?>
@@ -62,21 +62,34 @@ $listings = [
   </header>
   <div class="container mx-auto p-4 mt-4">
     <!-- Output -->
-    <?php foreach ($listings as $job) : ?>
+    <?php foreach ($listings as $index => $job) : ?>
       <div class="md my-4">
-        <div class="bg-white rounded-lg shadow-md">
+        <div class="
+        <?php if ($index % 2 == 0) : ?> 
+        bg-blue-100 
+        <?php else : ?> 
+        bg-white 
+        <?php endif; ?> rounded-lg shadow-md">
           <div class="p-4">
             <h2 class="text-xl font-semibold"><?= $job['title'] ?></h2>
             <p class="text-gray-700 text-lg mt-2"><?= $job['description'] ?></p>
             <ul class="mt-4">
               <li class="mb-2">
-                <strong>Salary:</strong> <?= $job['salary'] ?>
+                <strong>Salary:</strong> <?= number_format($job['salary'], 2) ?>
               </li>
               <li class="mb-2">
                 <strong>Location:</strong> <?= $job['location'] ?>
+                <?php if ($job['location'] === 'New York') : ?>
+                  <span class="text-xs ml-4 py-2 px-4 bg-blue-500 text-white rounded-2xl">Local</span>
+                <?php else : ?>
+                  <span class="text-xs ml-4 py-2 px-4 bg-orange-500 text-white rounded-2xl">Outside</span>
+                <?php endif; ?>
+
               </li>
               <li class="mb-2">
-                <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
+                <?php if (!empty($job['tags'])) : ?>
+                  <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
+                <?php endif ?>
               </li>
             </ul>
           </div>

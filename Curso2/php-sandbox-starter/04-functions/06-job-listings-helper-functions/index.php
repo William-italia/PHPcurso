@@ -30,7 +30,7 @@ $listings = [
     'description' => 'We are seeking a talented UX designer to create intuitive and visually appealing user interfaces.',
     'salary' => 70000,
     'location' => 'Seattle',
-    'tags' => ['User Experience', 'Wireframing', 'Prototyping']
+    'tags' => ['User Experience', 'Wireframing', 'Prototyping', 'Web Development']
   ],
   [
     'id' => 5,
@@ -41,6 +41,20 @@ $listings = [
     'tags' => []
   ],
 ];
+
+function format_salary($salary)
+{
+  $salaryFormat = '$' . number_format($salary, 2);
+
+  return $salaryFormat;
+}
+
+function highlightTags($tags, $searchTerm)
+{
+  $lowerCaseTags = array_map('strtolower', $tags);
+  $arraytags = implode(', ', $lowerCaseTags);
+  return str_replace(strtolower($searchTerm), "<span class='bg-yellow-200'>$searchTerm</span>", $arraytags);
+}
 ?>
 
 
@@ -69,7 +83,7 @@ $listings = [
             <p class="text-gray-700 text-lg mt-2"><?= $job['description'] ?></p>
             <ul class="mt-4">
               <li class="mb-2">
-                <strong>Salary:</strong> <?= $job['salary'] ?>
+                <strong>Salary:</strong> <?= format_salary($job['salary']) ?>
               </li>
               <li class="mb-2">
                 <strong>Location:</strong> <?= $job['location'] ?>
@@ -78,7 +92,7 @@ $listings = [
               </li>
               <?php if (!empty($job['tags'])) : ?>
                 <li class="mb-2">
-                  <strong>Tags:</strong> <?= implode(', ', $job['tags']) ?>
+                  <strong>Tags:</strong> <?= highlightTags($job['tags'], 'Development') ?>
                 </li>
               <?php endif; ?>
             </ul>
