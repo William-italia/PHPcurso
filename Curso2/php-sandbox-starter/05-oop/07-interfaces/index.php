@@ -1,3 +1,51 @@
+<?php
+
+  interface ContentInterface {
+    public function display();
+    public function edit();
+  }
+
+  class Article implements ContentInterface {
+    private $title;
+    private $content;
+
+    public function __construc($title, $content) {
+      $this->title = $title;
+      $this->content = $content;
+    }
+
+    public function display() {
+      echo "<h2>{$this->title}</h2>";
+      echo "<p>{$this->content}</p>";
+    }
+
+    public function edit() {
+      echo "Editing the Article '{$this->title}'";
+    }
+  }
+
+  class Video implements ContentInterface {
+    private $title;
+    private $url;
+
+    public function __construc($title, $url) {
+      $this->title = $title;
+      $this->url = $url;
+    }
+
+    public function display() {
+      echo "<h2>{$this->title}</h2>";
+      echo "<iframe src='{$this->url}'></iframe>";
+    }
+
+    public function edit() {
+      echo "Editing the video '{$this->title}'";
+    }
+  }
+
+  $article = new Article();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

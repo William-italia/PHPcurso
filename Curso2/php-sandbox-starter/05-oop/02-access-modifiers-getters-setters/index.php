@@ -1,38 +1,34 @@
 <?php
-  class User {
-    public $name;
-    public $age;
 
-    // Runs when an object is created
-    public function __construct($name, $age) {
-      echo 'Class: ' .  __CLASS__ . ' instantiated <br>';
-      $this->name = $name;
-      $this->age = $age;
-    }
+class User
+{
+  // Properties
+  private $name;
+  private $email;
+  protected $status = 'active';
 
-    public function sayHello() {
-      return $this->name . ' Says Hello';
-    }
-
-    // called when no other references to a a certain object
-    // used for cleanup, closing connections, etc
-    public function __destruct() {
-      echo '<br> destructor ran';
-    }
+  public function __construct($name, $email) {
+    $this->name = $name;
+    $this->email = $email;
   }
 
-  // $user1->name = 'william';
+  public function login() {
+    echo $this->name . ' logged in <br>';
+  }
 
-  $user1 = new User('william', 20);
-  echo $user1->name . ' is ' . $user1->age . ' years old';
-  echo '<br>';
-  echo $user1->sayHello();
-  
-  
-  echo '<br>';
+  public function setStatus($status) {
+    $this->status = $status;
+  }
 
-  $user1 = new User('william', 20);
-  echo $user1->name . ' is ' . $user1->age . ' years old';
-  echo '<br>';
-  echo $user1->sayHello();
-  
+  public function getStatus() {
+    echo $this->status;
+  }
+
+}
+
+$user1 = new User('william', 'william@gmail.com');
+
+$user1->login();
+
+$user1->setStatus('Inactive');
+$user1->getStatus();
