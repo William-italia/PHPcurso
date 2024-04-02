@@ -1,3 +1,16 @@
+<?php
+putenv('DB_HOST=localhost');
+putenv('DB_USER=root');
+
+
+$host = getenv('DB_HOST');
+$user = getenv('DB_USER');
+
+echo getenv('PROCESSOR_ARCHITECTURE');
+
+// var_dump(getenv());
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,12 +27,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
       <div class="bg-gray-200 p-4 rounded-lg">
-        <strong class="block mb-2">DB Host:</strong>
-
+        <strong class="block mb-2">DB Host</strong>
+        <span><?= $host ?></span>
       </div>
       <div class="bg-gray-200 p-4 rounded-lg">
         <strong class="block mb-2">DB User:</strong>
-
+        <span><?= getenv('DB_USER');?></span>
       </div>
 
     </div>

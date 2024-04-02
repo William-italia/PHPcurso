@@ -9,7 +9,7 @@
     private $title;
     private $content;
 
-    public function __construc($title, $content) {
+    public function __construct($title, $content) {
       $this->title = $title;
       $this->content = $content;
     }
@@ -28,7 +28,7 @@
     private $title;
     private $url;
 
-    public function __construc($title, $url) {
+    public function __construct($title, $url) {
       $this->title = $title;
       $this->url = $url;
     }
@@ -43,7 +43,8 @@
     }
   }
 
-  $article = new Article();
+  $article = new Article('Introduction to PHP', 'PHP is a versitile scripting language');
+  $video = new Video('PHP For Beginners', 'https://www.youtube.com/watch?v=BUCiSSyIGGU');
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +65,10 @@
   </header>
   <div class="container mx-auto p-4 mt-4">
     <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-      <!-- Output -->
+      <?= $article->display() ?>
+    </div>
+    <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+      <?= $video->display() ?>
     </div>
   </div>
 </body>
