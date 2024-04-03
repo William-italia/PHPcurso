@@ -6,8 +6,22 @@ putenv('DB_USER=root');
 $host = getenv('DB_HOST');
 $user = getenv('DB_USER');
 
-echo getenv('PROCESSOR_ARCHITECTURE');
+// echo getenv('PROCESSOR_ARCHITECTURE');
 
+
+$foo = 'Foo global';
+
+function test() {
+  $foo = 'Fool Local';
+
+  echo 'Global variable: ' . $GLOBALS['foo'] . '<BR>';
+  echo 'Local variable: ' . $foo . '<BR>';
+
+}
+
+$foo = 'hello';
+
+test();
 // var_dump(getenv());
 ?>
 
