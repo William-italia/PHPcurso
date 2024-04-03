@@ -22,7 +22,7 @@ function test() {
 $foo = 'hello';
 
 test();
-// var_dump(getenv());
+var_dump(getenv());
 ?>
 
 <!DOCTYPE html>
