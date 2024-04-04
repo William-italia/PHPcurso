@@ -1,0 +1,11 @@
+{
+    "name": "willi/02-env-globals",
+    "autoload": {
+        "psr-4": {
+            "Willi\\02EnvGlobals\\": "src/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

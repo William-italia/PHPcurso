@@ -1,55 +1,24 @@
-<?php
-putenv('DB_HOST=localhost');
-putenv('DB_USER=root');
+<?php 
+require 'vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable('./');
+// $dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']); DARIA PRA USAR CASO FOSSE UMA ESTRUTURA NORMAL DE PROJETO
+$dotenv->load();
 
-$host = getenv('DB_HOST');
-$user = getenv('DB_USER');
-
-// echo getenv('PROCESSOR_ARCHITECTURE');
-
-
-$foo = 'Foo global';
-
-function test() {
-  $foo = 'Fool Local';
-
-  echo 'Global variable: ' . $GLOBALS['foo'] . '<BR>';
-  echo 'Local variable: ' . $foo . '<BR>';
-
-}
-
-$foo = 'hello';
-
-test();
-var_dump(getenv());
+// <?= php __DIR__
+// <?php var_dump($_SERVER)
+var_dump($_ENV['ROOT'])
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>System Information</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
-<body class="bg-gray-100">
-  <div class="container mx-auto p-8 bg-white shadow-md mt-10 rounded-lg">
-    <h1 class="text-3xl font-semibold mb-4 text-center">System Information</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-      <div class="bg-gray-200 p-4 rounded-lg">
-        <strong class="block mb-2">DB Host</strong>
-        <span><?= $host ?></span>
-      </div>
-      <div class="bg-gray-200 p-4 rounded-lg">
-        <strong class="block mb-2">DB User:</strong>
-        <span><?= getenv('DB_USER');?></span>
-      </div>
-
-    </div>
+<body>
+    <pre>
+    </pre>
 </body>
-
 </html>
