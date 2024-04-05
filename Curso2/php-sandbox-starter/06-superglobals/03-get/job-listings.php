@@ -68,6 +68,29 @@ function calculateAverageSalary($listings)
 
   return formatSalary($averageSalary);
 }
+
+function filterListigsByLocation($listings, $location) {
+  return array_filter($listings, function($job) use ($location) {
+    return strcasecmp($job['location'], $location) === 0;
+  });
+}
+
+if(isset($_GET['location'])) {
+  $location = $_GET['location'];
+
+  $filteredListings = filterListigsByLocation($listings, $location);
+} else {
+  $filteredListings = $listings;
+}
+
+
+if (isset($_GET['location']) && $_GET['location'] === '') {
+  // Remove o parâmetro ?location da URL
+  $urlWithoutLocation = str_replace('?location=', '', $_SERVER['REQUEST_URI']);
+  // Redireciona para a URL sem o parâmetro ?location
+  header('Location: ' . $urlWithoutLocation);
+  exit; // Finaliza o script para evitar execução adicional
+}
 ?>
 
 
@@ -88,11 +111,23 @@ function calculateAverageSalary($listings)
     </div>
   </header>
   <div class="container mx-auto p-4 mt-4">
+  <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <label for="location">Selecione a localização:</label>
+    <select name="location" id="location">
+      <option value="" <?php echo (!isset($_GET['location'])?? '' === 'Todos' ? ' selected' : '')?>>Todos</option>
+        <option value="San Francisco"<?php echo ($_GET['location'] ?? '') === 'San Francisco' ? ' selected' : ''; ?>>San Francisco</option>
+        <option value="New York"<?php echo ($_GET['location'] ?? '') === 'New York' ? ' selected' : ''; ?>>New York</option>
+        <option value="Chicago"<?php echo ($_GET['location'] ?? '') === 'Chicago' ? ' selected' : ''; ?>>Chicago</option>
+        <option value="Seattle"<?php echo ($_GET['location'] ?? '') === 'Seattle' ? ' selected' : ''; ?>>Seattle</option>
+    </select>
+    <button class="bg-red-200" type="submit">Filtrar por localização</button>
+</form>
+
     <div class="bg-green-100 rounded-lg shadow-md p-6 my-6">
-      <h2 class="text-2xl font-semibold mb-4">Average Salary: <?= calculateAverageSalary($listings)  ?></h2>
+      <h2 class="text-2xl font-semibold mb-4">Average Salary: <?= calculateAverageSalary($filteredListings)  ?></h2>
     </div>
     <!-- Output -->
-    <?php foreach ($listings as $index => $job) : ?>
+    <?php foreach ($filteredListings as $index => $job) : ?>
       <div class="md my-4">
         <div class="rounded-lg shadow-md <?= $index % 2 === 0 ? 'bg-blue-100' : 'bg-white'; ?>">
           <div class="p-4">
@@ -105,7 +140,7 @@ function calculateAverageSalary($listings)
               <li class="mb-2">
                 <strong>Location:</strong> <?= $job['location'] ?>
 
-                <span class="text-xs text-white <?= $job['location'] === 'New York' ? 'bg-blue-500' : 'bg-green-500'; ?> rounded-full px-2 py-1 ml-2"><?= $job['location'] === 'New York' ? 'Local' : 'Remote'; ?></span>
+                <span class="text-xs text-white <?= $job['location'] === $location ? 'bg-blue-500' : 'bg-green-500'; ?> rounded-full px-2 py-1 ml-2"><?= $job['location'] === 'New York' ? 'Local' : 'Remote'; ?></span>
               </li>
               <?php if (!empty($job['tags'])) : ?>
                 <li class="mb-2">
