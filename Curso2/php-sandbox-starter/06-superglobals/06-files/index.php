@@ -1,45 +1,44 @@
 <?php
-$title = '';
-$description = '';
-$submitted = false;
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   $title = htmlspecialchars($_POST['title'] ?? '');
   $description = htmlspecialchars($_POST['description'] ?? '');
 
+  echo '<pre>';
+  var_dump($_FILES);
+  echo '</pre>';
 
   $file = $_FILES['logo'];
 
   if ($file['error'] === UPLOAD_ERR_OK) {
     // Specify where to upload
     $uploadDir = 'uploads/';
-
-    // Check and create dir
-    if (!is_dir($uploadDir)) {
+    
+    if(!is_dir($uploadDir)) {
       mkdir($uploadDir, 0755, true);
     }
 
-    // Create file name
-    $filename = uniqid() . '-' . $file['name'];
+    $fileName = uniqid() . '-' . $file['name'];
 
-    // Check file type
-    $allowedExtensions = ['jpg', 'jpeg', 'png'];
-    $fileExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    // check file type
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
-    // Make sure extension is in array
-    if (in_array($fileExtension, $allowedExtensions)) {
-      // Upload file
-      if (move_uploaded_file($file['tmp_name'], $uploadDir .  $filename)) {
-        echo 'File Uploaded!';
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+      if(in_array($fileExtension, $allowedExtensions)) {
+
+          if(move_uploaded_file($file['tmp_name'], $uploadDir . $fileName)) {
+            echo 'File Uploaded!';
+          } else {
+            echo 'File Upload Error: ' . $file['error'];
+          }
+
       } else {
-        echo 'File Upload Error: ' . $file['error'];
+        echo 'Invalid type';
       }
-    } else {
-      echo 'Invalid File Type';
-    }
-  }
 
-  $submitted = true;
+    }    
 }
 ?>
 
@@ -79,13 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
       </form>
 
       <!-- Display submitted data -->
-      <?php if ($submitted) : ?>
         <div class="mt-6 p-4 border rounded bg-gray-200">
           <h2 class="text-lg font-semibold">Submitted Job Listing:</h2>
           <p><strong>Title:</strong> <?= $title ?></p>
           <p><strong>Description:</strong> <?= $description ?></p>
         </div>
-      <?php endif; ?>
     </div>
   </div>
 </body>

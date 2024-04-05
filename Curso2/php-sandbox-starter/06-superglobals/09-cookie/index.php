@@ -1,3 +1,9 @@
+<?php
+
+setcookie('username', 'william', strtotime('+5days'));
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
