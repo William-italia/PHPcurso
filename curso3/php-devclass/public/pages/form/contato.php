@@ -20,19 +20,16 @@ $validate = validate([
 ]);
 
 
+$data = [
+	'quem' => $validate->email,
+	'para' => 'williamitalia70@outlook.com',
+	'mensagem' => $validate->message,
+	'assunto' => $validate->subject,
+    'nome' => $validate->name,
+];
 
+if (send($data)) {
+	flash('message', 'Email enviado com sucesso', 'success');
 
-
-
-// $data = [
-//     'quem' => $validate->email,
-//     'para' => 'williamitalia70@outlook.com',
-//     'message' => $validate->message,
-//     'assunto' => $validate->subject,
-// ];
-
-
-// if(send($data)) {
-//     redirect('contato');
-//     flash('message', 'Email enviado com sucesso', 'sucess');
-// };
+	return redirect("contato");
+}

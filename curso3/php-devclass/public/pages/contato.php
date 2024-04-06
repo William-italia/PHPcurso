@@ -9,7 +9,7 @@
     </div>
     <div class="form-group">
         <label for="">Email</label>
-        <input type="text" class="form-control" name="email" placeholder="Insira seu Email">
+        <input type="email" class="form-control" name="email" placeholder="Insira seu Email">
     </div>
     <div class="form-group">
         <label for="">Assunto</label>
