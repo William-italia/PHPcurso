@@ -1,22 +1,56 @@
+<!-- database -->
 <?php
 
-// Database configuration
-$host = 'localhost';
-$port = 3306;
-$dbName = 'blog';
-$username = 'root';
-$password = '';
 
-// Connection string (DSN)
-$dsn = "mysql:host={$host};port={$port};dbname={$dbName};charset=utf8";
+
+function connect() {
+    $host = 'localhost';
+    $port = 'localhost';
+    $dbName = 'blog';
+    $user = 'root';
+    $pw = 'root';
 
 try {
-  // Create a PDO instance
-  $pdo = new PDO($dsn, $username, $password);
+    $pdo = new \PDO("mysql:{$host};port={$port};dbname={$dbName};charset=utf8", $user, $pw);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    return $pdo;
 
-  // Set PDO to throw exceptions on error
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-  // If there is an error with the connection, catch it here
-  echo "Connection failed: " . $e->getMessage();
+} catch(PDOException $e) {
+    echo "Connection Feiled " . $e->getMessage();
+}
+}
+
+function all($table) {
+    $pdo = connect();
+
+    $sql = "SELECT * FROM {$table}";
+    $list = $pdo->query($sql);
+
+    $list->execute();  
+    
+    return $list->fetchAll();
+}
+
+function delete($table, $field, $value) {
+    $pdo = connect();
+
+    $sql = "DELETE FROM {$table} WHERE {$field} = :{$field}";
+    $delete = $pdo->prepare($sql);
+    $delete->bindParam($field, $value);
+
+    return $delete->execute();
+}
+
+function singlePost($table, $field, $value) {
+    $pdo = connect();
+
+    $sql = "SELECT * FROM {$table} WHERE {$field} = :{$field}";
+    $post = $pdo->prepare($sql);
+
+    $post->bindParam($field, $value);
+
+    $post->execute();  
+    
+    return $post->fetch();
 }
