@@ -10,9 +10,9 @@
     <?= getFlash('message') ?>
     </p>
 
-<h2 class="text-6xl font-bold text-center mb-4 p-2 border-y-[3px]">Contato</h2>
+<h2 class="text-6xl font-bold text-center mb-4 p-2 ">Contato</h2>
 
-<form action="pages/form/contato.php" method="POST" role="form" class="flex flex-col mt-10 pb-10">
+<form action="/pages/form/contato.php" method="POST" role="form" class="flex flex-col mt-10 pb-10">
     <div class="flex flex-col space-x-2 md:flex-row">
     <div class="form-group md:w-1/2">
         <label for="">Nome</label>

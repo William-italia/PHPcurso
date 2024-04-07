@@ -10,6 +10,7 @@ require('../bootstrap.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    
         <?php
             try {
                 require load();

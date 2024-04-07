@@ -19,6 +19,8 @@ $validate = validate([
     'message' => 's',
 ]);
 
+create();
+
 
 $data = [
 	'quem' => $validate->email,
