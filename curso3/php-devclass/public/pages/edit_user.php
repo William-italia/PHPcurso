@@ -23,6 +23,6 @@ $user = find('users', 'id', $_GET['id']);
         <label for="">Senha</label>
         <input type="text" name="password" class="form-control" value="<?= $user->password?>">
     </div>
-    <button type="submit" class="bg-[#ffffff] text-black p-4 rounded-xl transition-color duration-500 hover:bg-[#575757] hover:text-white">cadastrar</button>
+    <button type="submit" class="bg-[#ffffff] text-black p-4 rounded-xl transition-color duration-500 hover:bg-[#575757] hover:text-white">Atualizar</button>
 </form>
 </div>
