@@ -39,6 +39,7 @@ require 'database.php';
           <h2 class="text-xl font-semibold"><a href="post.php?id=<?= $post->id?>"><?= $post->title?> / <?= date('d-m-Y', strtotime($post->created_at))?></a></h2>
           <p class="text-gray-700 text-lg mt-2"><?= $post->body?></p>
           <form action="" method="" class="relative p-6">
+            <a href="edit.php?id=<?= $post->id?>" class="bg-orange-500 text-white py-2 px-4 absolute top-[10px] right-[100px] hover:bg-orange-400 transition-color duration-500">Editar</a>
             <a href="delete_post.php?id=<?= $post->id?>" class="bg-blue-500 text-white py-2 px-4 absolute top-[10px] right-0 hover:bg-blue-400 transition-color duration-500">Deletar</a>
           </form>
         </div>
