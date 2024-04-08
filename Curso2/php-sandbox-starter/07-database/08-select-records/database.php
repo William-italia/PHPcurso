@@ -21,6 +21,23 @@ try {
 }
 }
 
+function create($table, $fields) {
+    if(!is_array($fields)) {
+        $fields = (array) $fields;
+    }
+
+    $sql = "INSERT INTO {$table}";
+    $sql .= "(" . implode(',', array_keys($fields)) . ")";
+    $sql .= "VALUES (" . ":" . implode(',:', array_keys($fields)) . ")";
+
+
+    $pdo = connect();
+
+    $insert = $pdo->prepare($sql);
+    
+    return $insert->execute($fields);
+}
+
 function all($table) {
     $pdo = connect();
 

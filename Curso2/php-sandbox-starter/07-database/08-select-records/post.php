@@ -23,7 +23,7 @@ if(!$post) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Post One</title>
+  <title>Post <?= $post->id?></title>
 </head>
 <body class="bg-gray-100">
   <header class="bg-blue-500 text-white p-4">

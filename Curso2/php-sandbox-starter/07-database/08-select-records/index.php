@@ -24,7 +24,7 @@ require 'database.php';
   <header class="bg-blue-500 text-white p-4">
     <div class="container mx-auto flex items-center justify-between">
       <h1 class="text-3xl font-semibold">My Blog</h1>
-      <a href="create_post.php" class="border-b-[3px]">Create</a>
+      <a href="create.php" class="border-b-[3px]">Create</a>
     </div>
   </header>
 
