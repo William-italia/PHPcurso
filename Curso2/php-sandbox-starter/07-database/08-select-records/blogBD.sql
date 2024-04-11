@@ -25,3 +25,6 @@ SELECT DATE_FORMAT(created_at, '%Y') AS ano,
        DATE_FORMAT(created_at, '%m') AS mes,
        DATE_FORMAT(created_at, '%d') AS dia
 FROM posts;
+
+ALTER TABLE posts ADD COLUMN edited_at DATETIME DEFAULT NULL;
+
