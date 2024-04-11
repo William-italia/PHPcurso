@@ -71,3 +71,58 @@ function singlePost($table, $field, $value) {
     
     return $post->fetch();
 }
+
+// function update($table, $fields, $where) {
+
+//     $pdo = connect();
+
+//     $sql = "UPDATE {$table} SET ";
+
+//     $setClauses = [];
+
+//     foreach($fields as $field => $fieldValue) {
+//         $setClauses[] = "{$field} = :{$fieldValue}";
+//     }
+
+//     $sql .= implode(', ', $setClauses);
+//     $sql .= " WHERE {$where[0]} = :{$where[0]}";
+
+//     $data = array_merge($fields, [$where[0] => $where[1]]);
+
+//     $update = $pdo->prepare($sql);
+//     $update->execute($data);
+
+//     return $update->rowCount();
+// }
+
+function update($table, $fields, $where) {
+
+    $pdo = connect();
+
+    $fields['edited_at'] = date('Y-m-d H:i:s');
+
+    $sql = "UPDATE {$table} SET ";
+
+    $setClauses = [];
+
+    foreach($fields as $field => $fieldValue) {
+        $setClauses[] = "{$field} = :{$field}"; 
+    }
+
+    
+    $sql .= implode(', ', $setClauses);
+    $sql .= " WHERE {$where[0]} = :{$where[0]}"; 
+
+
+    
+    $update = $pdo->prepare($sql);
+
+    $fields[$where[0]] = $where[1];
+
+    $update->execute(array_merge($fields, [$where[0] => $where[1]])); 
+    // $update->execute(array_merge($fields, ['id' => $where['id']])); 
+    echo "SQL: " . $sql . "<br>";
+
+    return $update->rowCount();
+
+}

@@ -1,3 +1,31 @@
+<?php
+require 'database.php';
+$erro = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+
+      if($_POST['title'] != '' && $_POST['body'] != '') {
+
+        $title = htmlspecialchars($_POST['title']); 
+        $body = htmlspecialchars($_POST['body']); 
+
+        $sql = "INSERT INTO posts (title, body) VALUES (:title, :body)";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':body', $body);
+
+        if($stmt->execute()) {
+            header('Location: index.php');
+            exit;
+        }
+        
+      }
+  }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +45,8 @@
   <div class="flex justify-center mt-10">
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
       <h1 class="text-2xl font-semibold mb-6">Create Blog Post</h1>
-      <form method="post">
+      <p class="text-red-800"><?= $erro?></p>
+      <form method="POST">
         <div class="mb-4">
           <label for="title" class="block text-gray-700 font-medium">Title</label>
           <input type="text" id="title" name="title" placeholder="Enter post title" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none">

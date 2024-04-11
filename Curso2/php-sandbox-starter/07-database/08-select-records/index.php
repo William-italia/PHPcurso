@@ -3,11 +3,6 @@
 
 require 'database.php';
 
-// function formatarData($data) {
-//   // Formata a data para o formato desejado (dia/mês/ano)
-//   return date('d/m/Y', strtotime($data));
-// }
-
 ?>
 
 <!DOCTYPE html>
@@ -36,17 +31,33 @@ require 'database.php';
     <div class="md my-4">
       <div class="rounded-lg shadow-md">
         <div class="p-4">
-          <h2 class="text-xl font-semibold"><a href="post.php?id=<?= $post->id?>"><?= $post->title?> / <?= date('d-m-Y', strtotime($post->created_at))?></a></h2>
+        <h2 class="text-xl font-semibold"><a href="post.php?id=<?= $post->id?>"><?= $post->title?> / <?= date('d-m-Y', strtotime($post->created_at))?></a></h2>
+
           <p class="text-gray-700 text-lg mt-2"><?= $post->body?></p>
-          <form action="" method="" class="relative p-6">
-            <a href="edit.php?id=<?= $post->id?>" class="bg-orange-500 text-white py-2 px-4 absolute top-[10px] right-[100px] hover:bg-orange-400 transition-color duration-500">Editar</a>
+          <div class="relative p-6">
+          <?php if ($post->edited_at !== null) : ?>
+            <span class="edited-time">Última edição: <?= date('H:i:s', strtotime($post->edited_at)) ?></span>
+          <?php endif; ?>
+            <form action="edit.php" method="post">
+              <input type="hidden" name="post_id" value="<?= $post->id?>">
+              <button type="submit" class="bg-orange-500 text-white py-2 px-4 absolute top-[10px] right-[100px] hover:bg-orange-400 transition-color duration-500">Editar</button>
+            </form>
             <a href="delete_post.php?id=<?= $post->id?>" class="bg-blue-500 text-white py-2 px-4 absolute top-[10px] right-0 hover:bg-blue-400 transition-color duration-500">Deletar</a>
-          </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <?php endforeach;?>
+  <script>
+    // Remover os horários de edição depois de 10 segundos
+    setTimeout(function() {
+      var editedTimes = document.querySelectorAll('.edited-time');
+      editedTimes.forEach(function(time) {
+        time.style.display = 'none';
+      });
+    }, 10000); // 10 segundos
+  </script>
 </body>
 
 </html>

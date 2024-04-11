@@ -1,21 +1,22 @@
 <?php
 
-function connect() {
-  $host = 'localhost';
-  $port = 'localhost';
-  $dbName = 'blog';
-  $user = 'root';
-  $pw = 'root';
+// Database configuration
+$host = 'localhost';
+$port = 'localhost';
+$dbName = 'blog';
+$username = 'root';
+$password = 'root';
+
+// Connection string (DSN)
+$dsn = "mysql:host={$host};port={$port};dbname={$dbName};charset=utf8";
 
 try {
-  $pdo = new \PDO("mysql:{$host};port={$port};dbname={$dbName};charset=utf8", $user, $pw);
+  // Create a PDO instance
+  $pdo = new PDO($dsn, $username, $password);
+
+  // Set PDO to throw exceptions on error
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-  return $pdo;
-
-} catch(PDOException $e) {
-  echo "Connection Feiled " . $e->getMessage();
+} catch (PDOException $e) {
+  // If there is an error with the connection, catch it here
+  echo "Connection failed: " . $e->getMessage();
 }
-}
-
-connect();
